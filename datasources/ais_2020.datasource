@@ -1,0 +1,25 @@
+TOKEN "append_ais" APPEND
+
+
+SCHEMA >
+    `mmsi` Int64,
+    `basedatetime` DateTime,
+    `lat` Float32,
+    `lon` Float32,
+    `sog` Float32,
+    `cog` Float32,
+    `heading` Float32,
+    `vesselname` Nullable(String),
+    `imo` Nullable(String),
+    `callsign` Nullable(String),
+    `vesseltype` Nullable(Int16),
+    `status` Nullable(Int16),
+    `length` Nullable(Int16),
+    `width` Nullable(Int16),
+    `draft` Nullable(Float32),
+    `cargo` Nullable(Int16),
+    `transceiverclass` String
+
+ENGINE "MergeTree"
+ENGINE_PARTITION_KEY "toYear(basedatetime)"
+ENGINE_SORTING_KEY "basedatetime, mmsi, transceiverclass"

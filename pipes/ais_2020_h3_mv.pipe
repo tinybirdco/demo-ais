@@ -1,0 +1,19 @@
+NODE transform
+SQL >
+
+    SELECT
+        basedatetime,
+        mmsi,
+        coalesce(vesselname, '') as vesselname,
+        coalesce(callsign, '') as callsign,
+        lat,
+        lon,
+        geoToH3(toFloat64(lon), toFloat64(lat), 6) as h3_r6,
+        geoToH3(toFloat64(lon), toFloat64(lat), 8) as h3_r8,
+        heading
+    FROM ais_2020
+
+TYPE materialized
+DATASOURCE ais_2020_h3
+
+

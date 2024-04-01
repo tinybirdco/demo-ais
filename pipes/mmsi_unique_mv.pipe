@@ -1,0 +1,9 @@
+NODE filter
+SQL >
+
+    SELECT distinct mmsi FROM ais_2020
+
+TYPE materialized
+DATASOURCE ais_2020_unique_mmsi
+
+

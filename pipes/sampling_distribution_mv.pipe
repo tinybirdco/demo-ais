@@ -1,0 +1,16 @@
+NODE aggregate
+SQL >
+
+    SELECT
+        mmsi,
+        toDate(basedatetime) AS dt,
+        countState(dt) AS sample_count
+    FROM ais_2020
+    GROUP BY
+        mmsi,
+        dt
+
+TYPE materialized
+DATASOURCE sampling_distribution
+
+
