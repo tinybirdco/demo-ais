@@ -1,0 +1,8 @@
+TOKEN "mmsi_unique_endpoint_read_3417" READ
+
+NODE filter
+SQL >
+
+    SELECT distinct mmsi FROM sampling_distribution
+
+

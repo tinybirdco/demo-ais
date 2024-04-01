@@ -1,0 +1,10 @@
+# Data Source created from Pipe 'sampling_distribution_mv'
+
+SCHEMA >
+    `mmsi` Int64,
+    `dt` Date,
+    `sample_count` AggregateFunction(count, Date)
+
+ENGINE "AggregatingMergeTree"
+ENGINE_PARTITION_KEY "toYYYYMM(dt)"
+ENGINE_SORTING_KEY "mmsi, dt"
