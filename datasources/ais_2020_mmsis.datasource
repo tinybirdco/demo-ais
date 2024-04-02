@@ -1,0 +1,7 @@
+# Data Source created from Pipe 'mmsi_unique_mv'
+
+SCHEMA >
+    `mmsi` Int64
+
+ENGINE "AggregatingMergeTree"
+ENGINE_SORTING_KEY "mmsi"
