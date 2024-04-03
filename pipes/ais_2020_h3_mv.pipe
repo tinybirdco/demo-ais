@@ -8,6 +8,7 @@ SQL >
         coalesce(callsign, '') as callsign,
         lat,
         lon,
+        geoToH3(toFloat64(lon), toFloat64(lat), 4) as h3_r4,
         geoToH3(toFloat64(lon), toFloat64(lat), 6) as h3_r6,
         geoToH3(toFloat64(lon), toFloat64(lat), 8) as h3_r8,
         heading
