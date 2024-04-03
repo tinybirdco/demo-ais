@@ -3,6 +3,13 @@ TOKEN "mmsi_unique_endpoint_read_3417" READ
 NODE filter
 SQL >
 
+    SELECT mmsi FROM ais_2020_mmsis
+
+
+
+NODE mmsi_unique_1
+SQL >
+
     SELECT distinct mmsi FROM sampling_distribution
 
 

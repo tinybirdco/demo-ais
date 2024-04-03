@@ -7,10 +7,11 @@ SCHEMA >
     `callsign` String,
     `lat` Float32,
     `lon` Float32,
+    `h3_r4` UInt64,
     `h3_r6` UInt64,
     `h3_r8` UInt64,
     `heading` Float32
 
 ENGINE "MergeTree"
 ENGINE_PARTITION_KEY "toYYYYMM(basedatetime)"
-ENGINE_SORTING_KEY "mmsi, h3_r6, h3_r8, basedatetime"
+ENGINE_SORTING_KEY "mmsi, h3_r4, h3_r6, h3_r8, basedatetime"

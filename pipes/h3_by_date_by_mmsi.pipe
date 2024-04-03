@@ -1,19 +1,16 @@
-TOKEN "h3_by_date_by_mmsi_endpoint_read_8603" READ
+TOKEN "h3_r6_by_date_by_mmsi_endpoint_read_4253" READ
 
-NODE h3_by_date_by_mmsi_0
+NODE filter
 SQL >
 
     %
-    {% if defined(latlon_only) %}
-      SELECT basedatetime, mmsi, lat, lon
-    {% else %}
-      SELECT basedatetime, mmsi, vesselname, callsign, lat, lon, h3_r6, h3_r8, heading
-    {% end %}
+    SELECT 
+        distinct mmsi, h3ToGeoBoundary({{column(h3r, 'h3_r4')}}) h3_boundary, min(basedatetime) first_datetime
     FROM ais_2020_h3
     where basedatetime >= toStartOfDay(parseDateTimeBestEffort({{String(startdate, '20200102', description="First date to return YYYYMMDD")}}))
     AND basedatetime < toStartOfDay(parseDateTimeBestEffort({{String(enddate, '20200131', description="Last date to return YYYYMMDD")}})) + INTERVAL 1 DAY
-    {% if defined(mmsis) %}
-      AND mmsi in splitByChar(',', {{String(mmsis, '235010170,236112226', description="Filter by comma separated list of mmsis")}}, 16)
-    {% end %}
+    AND mmsi in splitByChar(',', {{String(mmsis, '235010170,236112226', description="Filter by comma separated list of mmsis", required=True)}}, 16)
+    group by mmsi, {{column(h3r, 'h3_r4')}}
+    order by first_datetime asc
 
 
