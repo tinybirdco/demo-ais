@@ -61,59 +61,64 @@ mmsi_options = fetch_mmsi_list()
 
 app.layout = html.Div([
     dcc.Store(id='cached-data'),  # Store for caching fetched data
+    html.Header([
+        html.Img(src=app.get_asset_url('tinybird-logo.svg')),
+        html.H2([html.Span("AIS", className='border-brand'), html.Span(" Data Visualization")], className='title'),
+    ]),
     # Flex container
     html.Div([
         # Left column for input elements
-        html.Div([
-            html.H2("AIS Data Visualization", style={'padding': '10px'}),
-        html.H4('Select Display Mode:', style={'padding': '5px'}),
-        dcc.RadioItems(
-            id='display-mode',
-            options=[
-                {'label': 'H3 r4', 'value': 'h3_r4'},
-                {'label': 'H3 r6', 'value': 'h3_r6'},
-                {'label': 'H3 r8', 'value': 'h3_r8'},
-                {'label': 'LatLong', 'value': 'data_points'}
-            ],
-            value='h3_r4',  # Default value
-            labelStyle={'display': 'block'}  # Display options in block mode
-        ),
-        html.H4('Select MMSI:', style={'padding': '5px'}),
-        dcc.Dropdown(
-            id='mmsi-dropdown',
-            options=mmsi_options,
-            value=mmsi_options[0]['value'] if mmsi_options else None,
-            style={'width': '100%', 'padding': '5px'},
-            searchable=True,
-            placeholder='Select MMSI'
-        ),
-        html.H4('Start Date:', style={'padding': '5px'}),
-        dcc.DatePickerSingle(
-            id='start-date-input',
-            min_date_allowed=date(2020, 1, 1),
-            max_date_allowed=date(2020, 5, 31),
-            initial_visible_month=date(2020, 1, 1),
-            date=date(2020, 1, 1),
-            style={'width': '100%', 'padding': '5px'}
-        ),
-        html.H4('End Date:', style={'padding': '5px'}),
-        dcc.DatePickerSingle(
-            id='end-date-input',
-            min_date_allowed=date(2020, 1, 1),
-            max_date_allowed=date(2020, 5, 31),
-            initial_visible_month=date(2020, 5, 31),
-            date=date(2020, 1, 31),
-            style={'width': '100%', 'padding': '5px'}
-        ),
-        html.Button('Submit', id='submit-val', n_clicks=0, style={'margin': '20px'}),
-        html.Div(id="performance-info", style={'padding': '5px'})
-        ], style={'width': '20%', 'display': 'inline-block', 'vertical-align': 'top', 'padding': '20px'}),
+            html.Div([
+                html.P('Select options and click submit to see data.', className='subtitle'),
+                html.Label('Display Mode', htmlFor='display-mode'),
+                dcc.RadioItems(
+                    id='display-mode',
+                    options=[
+                        {'label': 'H3 r4', 'value': 'h3_r4'},
+                        {'label': 'H3 r6', 'value': 'h3_r6'},
+                        {'label': 'H3 r8', 'value': 'h3_r8'},
+                        {'label': 'LatLong', 'value': 'data_points'}
+                    ],
+                    value='h3_r4',  # Default value
+                    className='input',
+                    labelClassName="label-radio"
+                ),
+                html.Label('MMSI', htmlFor='mmsi-dropdown'),
+                dcc.Dropdown(
+                    id='mmsi-dropdown',
+                    options=mmsi_options,
+                    value=mmsi_options[0]['value'] if mmsi_options else None,
+                    searchable=True,
+                    placeholder='Select MMSI',
+                    className='input'
+                ),
+                html.Label('Start Date', htmlFor='start-date-input'),
+                dcc.DatePickerSingle(
+                    id='start-date-input',
+                    min_date_allowed=date(2020, 1, 1),
+                    max_date_allowed=date(2020, 5, 31),
+                    initial_visible_month=date(2020, 1, 1),
+                    date=date(2020, 1, 1),
+                    className='input'
+                ),
+                html.Label('End Date', htmlFor='end-date-input'),
+                dcc.DatePickerSingle(
+                    id='end-date-input',
+                    min_date_allowed=date(2020, 1, 1),
+                    max_date_allowed=date(2020, 5, 31),
+                    initial_visible_month=date(2020, 5, 31),
+                    date=date(2020, 1, 31),
+                    className='input'
+                ),
+                html.Button('Submit', id='submit-val', n_clicks=0, className='submit'),
+                html.Div(id="performance-info"),
+            ], className='form'),
         # Right column for the map
         html.Div([
-            dcc.Graph(id='map-display', style={"height": "90vh"})
-        ], style={'width': '70%', 'display': 'inline-block', 'padding': '20px'})
-    ], style={'display': 'flex', 'flex-direction': 'row', 'justify-content': 'space-between', 'align-items': 'start'}),
-], style={'font-family': 'Arial, sans-serif'})
+            dcc.Graph(id='map-display', className='map')
+        ], className='graph')
+    ], className='row'),
+])
 
 def prepare_performance_info(cached_data):
     request_roundtrip_time = cached_data.get('request_roundtrip_time', 'N/A')
@@ -162,7 +167,7 @@ def fetch_data(n_clicks, mmsi, start_date, end_date, display_mode):
 )
 def update_map(cached_data):
     if not cached_data or 'data' not in cached_data:
-        return go.Figure(), "Select options and click submit to see data."
+        return go.Figure(), ''
 
     display_mode = cached_data.get('mode')
     print(f"Dislay mode: {display_mode}")
@@ -182,7 +187,7 @@ def update_map(cached_data):
     adjust_viewport(fig)
 
     performance_info = prepare_performance_info(cached_data)
-    return fig, performance_info
+    return fig, html.Div(performance_info, className='info')
 
 def adjust_viewport(fig):
     # Attempt to automatically adjust the map's viewport to show all plotted data
