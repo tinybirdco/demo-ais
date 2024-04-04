@@ -15,13 +15,16 @@ The dataset comes from [NOAA](https://coast.noaa.gov/htdata/CMSP/AISDataHandler/
 
 ## To Use
 
-1. Checkout this repository
-2. Install the requirements.txt in a local pyenv
-2. Open your Tinybird Workspace, and grab your User Admin Token, then run `tb auth` into this directory so the scripts can use the token.
-3. `tb push` the data project to establish the backend processing structure and serve the data APIs.
-4. Use noaa_uploader.sh to append as many of the zipped CSV files as you need to Tinybird for sample data. Jan-May is about 1b rows. 
+1. Clone this repository
+2. Create a Python virtual env `python -m venv .venv && ./.venv/bin/activate`
+3. Install the Python dependencies `pip install -r requirements.txt`
+4. Open or [create](https://www.tinybird.co/docs) your [Tinybird](https://www.tinybird.co/) Workspace
+5. Open the [Tinybird Auth Token](https://www.tinybird.co/docs/concepts/auth-tokens) page and copy the User Admin Token
+6. In your CLI, run `tb auth` in the repo directory and paste the Auth Token
+7. Then run `tb push` to establish the backend processing structure and serve the data APIs
+8. Use `noaa_uploader.sh` to append as many of the zipped CSV files as you need to Tinybird for sample data. Jan-May is about 1b rows
 > ⚠️ **NOTE:** NOAA provide this data for free, so don't abuse their download server
-5. Run app.py to have a local Dash app to explore some of the shipping data. The default values should work.
+9. Run `app.py` to have a local Dash app to explore some of the shipping data. The default values should work
 
 You could also stream in live AIS data following the same format.
 
