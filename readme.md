@@ -16,7 +16,7 @@ The dataset comes from [NOAA](https://coast.noaa.gov/htdata/CMSP/AISDataHandler/
 ## To Use
 
 1. Clone this repository
-2. Create a Python virtual env `python -m venv .venv && ./.venv/bin/activate`
+2. Create a Python virtual env `python -m venv .venv && source ./.venv/bin/activate`
 3. Install the Python dependencies `pip install -r requirements.txt`
 4. Open or [create](https://www.tinybird.co/docs) your [Tinybird](https://www.tinybird.co/) Workspace
 5. Open the [Tinybird Auth Token](https://www.tinybird.co/docs/concepts/auth-tokens) page and copy the User Admin Token
@@ -29,4 +29,5 @@ The dataset comes from [NOAA](https://coast.noaa.gov/htdata/CMSP/AISDataHandler/
 You could also stream in live AIS data following the same format.
 
 ## Credits
+
 Created by: @Chaffelson @juliavallina @sdairs
