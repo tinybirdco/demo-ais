@@ -2,5 +2,5 @@
 SCHEMA >
     `mmsi` Int64
 
-ENGINE "AggregatingMergeTree"
+ENGINE "ReplacingMergeTree"
 ENGINE_SORTING_KEY "mmsi"
