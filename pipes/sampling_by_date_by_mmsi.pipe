@@ -4,17 +4,17 @@ NODE aggregate
 SQL >
 
     %
-    SELECT
-      mmsi,
-      dt,
-      countMerge(sample_count) as sample_count
-    FROM sampling_distribution
-    where 1
-    AND dt >= toDate(parseDateTimeBestEffort({{String(startdate, '20200102', description="First date to return YYYYMMDD")}}))
-    AND dt <= toDate(parseDateTimeBestEffort({{String(enddate, '20200131', description="Last date to return YYYYMMDD")}}))
-    {% if defined(mmsis) %}
-      AND mmsi in splitByChar(',', {{String(mmsis, '235010170,236112226', description="Filter by comma separated list of mmsis")}}, 16)
-    {% end %}
-    group by mmsi, dt
+        SELECT
+          mmsi,
+          dt,
+          countMerge(sample_count) as sample_count
+        FROM sampling_distribution
+        where 1
+        AND dt >= toDate(parseDateTimeBestEffort({{String(startdate, '20200102', description="First date to return YYYYMMDD")}}))
+        AND dt <= toDate(parseDateTimeBestEffort({{String(enddate, '20200131', description="Last date to return YYYYMMDD")}}))
+        {% if defined(mmsis) %}
+          AND mmsi in splitByChar(',', {{String(mmsis, '235010170,236112226', description="Filter by comma separated list of mmsis")}}, 16)
+        {% end %}
+        group by mmsi, dt
 
 

@@ -1,4 +1,3 @@
-# Data Source created from Pipe 'ais_2020_h3_mv'
 
 SCHEMA >
     `basedatetime` DateTime,

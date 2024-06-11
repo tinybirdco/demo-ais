@@ -1,4 +1,3 @@
-# Data Source created from Pipe 'sampling_distribution_mv'
 
 SCHEMA >
     `mmsi` Int64,

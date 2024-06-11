@@ -1,2 +1,4 @@
 .tinyb
 .venv
+.diff_tmp
+AIS_2020_*

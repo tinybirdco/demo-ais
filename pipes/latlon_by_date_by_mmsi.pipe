@@ -4,10 +4,10 @@ NODE h3_by_date_by_mmsi_0
 SQL >
 
     %
-    SELECT basedatetime, mmsi, lat, lon
-    FROM ais_2020_h3
-    where basedatetime >= toStartOfDay(parseDateTimeBestEffort({{String(startdate, '20200102', description="First date to return YYYYMMDD")}}))
-    AND basedatetime < toStartOfDay(parseDateTimeBestEffort({{String(enddate, '20200131', description="Last date to return YYYYMMDD")}})) + INTERVAL 1 DAY
-    AND mmsi in splitByChar(',', {{String(mmsis, '235010170,236112226', description="Filter by comma separated list of mmsis", required=True)}}, 16)
+        SELECT basedatetime, mmsi, lat, lon
+        FROM ais_2020_h3
+        where basedatetime >= toStartOfDay(parseDateTimeBestEffort({{String(startdate, '20200102', description="First date to return YYYYMMDD")}}))
+        AND basedatetime < toStartOfDay(parseDateTimeBestEffort({{String(enddate, '20200131', description="Last date to return YYYYMMDD")}})) + INTERVAL 1 DAY
+        AND mmsi in splitByChar(',', {{String(mmsis, '235010170,236112226', description="Filter by comma separated list of mmsis", required=True)}}, 16)
 
 

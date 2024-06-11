@@ -1,4 +1,3 @@
-# Data Source created from Pipe 'mmsi_unique_mv'
 
 SCHEMA >
     `mmsi` Int64
