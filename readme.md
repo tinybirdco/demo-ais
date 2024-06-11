@@ -4,6 +4,8 @@ This Demo offers a simple exploratory interface over AIS Data.
 
 ![Splash Image](assets/readme_splash.png)
 
+For a chosen [MMSI](https://en.wikipedia.org/wiki/Maritime_Mobile_Service_Identity), it shows the vessel location over chosen dates. Location can be represented with latitude and longitude, or with [H3](https://h3geo.org/). The H3 resolution can be adjusted to show more or less detail.
+
 ## Components
 
 The Dashboard is created using [Dash & Plotly](https://dash.plotly.com/) for the map, [Pandas](https://pandas.pydata.org/) for the frontend data processing, and [Tinybird](https://ui.tinybird.co/signup) for the backend.
