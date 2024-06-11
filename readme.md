@@ -22,7 +22,7 @@ The dataset comes from [NOAA](https://coast.noaa.gov/htdata/CMSP/AISDataHandler/
 5. Open the [Tinybird Auth Token](https://www.tinybird.co/docs/concepts/auth-tokens) page and copy the User Admin Token
 6. In your CLI, run `tb auth` in the repo directory and paste the Auth Token
 7. Then run `tb push` to establish the backend processing structure and serve the data APIs
-8. Use `noaa_uploader.sh` to append as many of the zipped CSV files as you need to Tinybird for sample data. Jan-May is about 1b rows
+8. Use `noaa_uploader.sh` to append as many of the zipped CSV files as you need to Tinybird for sample data. Jan-May is about 1b rows. You will need `jq`installed: `sudo apt-get update && sudo apt-get install jq -y --no-install-recommends` or `brew install jq` for MacOS.
 > ⚠️ **NOTE:** NOAA provide this data for free, so don't abuse their download server
 9. Run `app.py` to have a local Dash app to explore some of the shipping data. The default values should work
 
