@@ -36,7 +36,7 @@ def prepare_hexagon_data(df, h3_boundary_column_name):
     """
     Prepare hexagon boundary data for plotting from a DataFrame. Adjusts for closing polygons
     and ensures coordinates are in the expected order.
-    
+
     :param df: The DataFrame with H3 boundary arrays.
     :param h3_boundary_column_name: The name of the column containing H3 boundaries.
     :return: A list of dictionaries with 'lon' and 'lat' keys for each hexagon.
@@ -50,7 +50,7 @@ def prepare_hexagon_data(df, h3_boundary_column_name):
         # Unpack the array of [lat, lon] pairs into separate lists
         # reversing the order to [lon, lat] for plotly
         lons, lats = zip(*[(lon, lat) for lat, lon in boundary_reversed])
-        
+
         hexagon_data.append({'lon': lons, 'lat': lats})
     return hexagon_data
 
@@ -128,7 +128,7 @@ def prepare_performance_info(cached_data):
 
     return [
         html.Div(f"Request roundtrip time: {request_roundtrip_time:.3f} s"),
-        html.Div(f"Tinybird processing time: {tb_elapsed:.3f} ms"),
+        html.Div(f"Tinybird processing time: {tb_elapsed:.3f} s"),
         html.Div(f"Tinybird Bytes read: {format_bytes(tb_bytes_read)}"),
         html.Div(f"Data points: {data_points}")
     ]
@@ -136,9 +136,9 @@ def prepare_performance_info(cached_data):
 @app.callback(
     Output('cached-data', 'data'),
     [Input('submit-val', 'n_clicks')],
-    [State('mmsi-dropdown', 'value'), 
-     State('start-date-input', 'date'), 
-     State('end-date-input', 'date'), 
+    [State('mmsi-dropdown', 'value'),
+     State('start-date-input', 'date'),
+     State('end-date-input', 'date'),
      State('display-mode', 'value')]
 )
 def fetch_data(n_clicks, mmsi, start_date, end_date, display_mode):
@@ -147,11 +147,11 @@ def fetch_data(n_clicks, mmsi, start_date, end_date, display_mode):
         api_endpoint = "latlon_by_date_by_mmsi.json" if display_mode == 'data_points' else "h3_by_date_by_mmsi.json"
         h3_resolution = "" if display_mode == 'data_points' else f"&h3r=h3_r{display_mode[-1]}"
         url = f"{TB_BASE_URL}{api_endpoint}?mmsis={mmsi}&startdate={start_date}&enddate={end_date}{h3_resolution}&token={TB_TOKEN}"
-        
+
         response = requests.get(url)
         end_request_time = time.time()
         print(f"Requests data length: {len(response.json()['data'])}")
-        
+
         return {
             'mode': display_mode,
             'data': response.json()['data'],
@@ -219,8 +219,8 @@ def render_hexagons(df, fig):
     hexagon_data = prepare_hexagon_data(df, 'h3_boundary')
     for hex_data in hexagon_data:
         fig.add_trace(go.Scattergeo(
-            lon=hex_data['lon'], 
-            lat=hex_data['lat'], 
+            lon=hex_data['lon'],
+            lat=hex_data['lat'],
             mode='lines',
             line=dict(width=1, color='orange'),  # Hexagon line color
             fill='toself',
@@ -231,8 +231,8 @@ def render_hexagons(df, fig):
 def render_latlong_points(df, fig):
     # Plotting lat-long points with specific marker settings
     fig.add_trace(go.Scattergeo(
-        lon=df['lon'], 
-        lat=df['lat'], 
+        lon=df['lon'],
+        lat=df['lat'],
         mode='markers+lines',
         marker=dict(size=7, color='red'),  # Data point color
         line=dict(width=2, color='red'),  # Line color connecting the points
