@@ -166,7 +166,7 @@ def fetch_data(n_clicks, mmsi, start_date, end_date, display_mode):
     [Input('cached-data', 'data')]
 )
 def update_map(cached_data):
-    if not cached_data or 'data' not in cached_data:
+    if not cached_data or 'data' not in cached_data or not cached_data['data']:
         return go.Figure(), ''
 
     display_mode = cached_data.get('mode')
