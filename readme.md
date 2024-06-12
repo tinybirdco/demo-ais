@@ -32,4 +32,4 @@ You could also stream in live AIS data following the same format.
 
 ## Credits
 
-Created by: @Chaffelson @juliavallina @sdairs
+Created by: [@Chaffelson](https://github.com/Chaffelson), [@juliavallina](https://github.com/juliavallina), [@sdairs](https://github.com/sdairs), and  [@rbarbadillo](https://github.com/rbarbadillo)
