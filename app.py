@@ -150,11 +150,12 @@ def fetch_data(n_clicks, mmsi, start_date, end_date, display_mode):
 
         response = requests.get(url)
         end_request_time = time.time()
-        print(f"Requests data length: {len(response.json()['data'])}")
+        data = response.json().get('data', [])
+        print(f"Requests data length: {len(data)}")
 
         return {
             'mode': display_mode,
-            'data': response.json()['data'],
+            'data': data,
             'request_roundtrip_time': end_request_time - start_request_time,
             'statistics': response.json().get('statistics', {}),
             'cache_key': f"{display_mode}_{start_date}_{end_date}_{mmsi}"  # Unique key for caching
