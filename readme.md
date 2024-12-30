@@ -6,9 +6,16 @@ The AIS Explorer template provides a graphical exploratory interface for automat
 
 For any given [MMSI](https://en.wikipedia.org/wiki/Maritime_Mobile_Service_Identity), the AIS Explorer shows the vessel's location over selected dates. You can represent location using latitude and longitude, or through [H3](https://h3geo.org/). You can adjust the H3 resolution to show more or less detail.
 
-## Deploy on Tinybird
+## Quick start
 
-To deploy this template on Tinybird, open https://app.tinybird.co/?starter_kit=https%3A%2F%2Fgithub.com%2Ftinybirdco%2Fdemo-ais in your browser.
+To deploy this template on Tinybird, click the following button:
+
+[![Deploy to Tinybird](https://cdn.tinybird.co/static/images/Tinybird-Deploy-Button.svg)](https://app.tinybird.co/?starter_kit=https%3A%2F%2Fgithub.com%2Ftinybirdco%2Fdemo-ais)
+
+Then clone or fork this repository and deploy the data project to Tinybird.
+
+- Use noaa_uploader.sh to append as many of the zipped CSV files as you need to Tinybird for sample data.
+- Run app.py to have a local app to explore some of the shipping data. The default values should work.
 
 ## Local deployment
 
@@ -33,6 +40,9 @@ AIS Explorer uses [Dash and Plotly](https://dash.plotly.com/) for the map, [Pand
 ## Dataset
 
 The dataset comes from [NOAA](https://coast.noaa.gov/htdata/CMSP/AISDataHandler/2020/index.html). It contains a few billion vessel observation samples from 2020.
+
+> [!WARNING]
+> NOAA provides this data for free, so don't abuse their download server.
 
 ## Credits
 
